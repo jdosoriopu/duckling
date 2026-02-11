@@ -245,7 +245,7 @@ ruleElProximoCycle = Rule
   { name = "el proximo <cycle> "
   , pattern =
     [ regex "(el|los|la|las) ?"
-    , regex "pr(ó|o)xim(o|a)s?|siguientes?"
+    , regex "pr(ó|o)xim(o|a)s?"
     , dimension TimeGrain
     ]
   , prod = \tokens -> case tokens of
@@ -846,13 +846,15 @@ ruleDentroDeDuration = Rule
       _ -> Nothing
   }
 
-ruleWeekend :: Rule
-ruleWeekend = Rule
-  { name = "week-end"
+ruleFinDeSemana :: Rule
+ruleFinDeSemana = Rule
+  { name = "fin de semana"
   , pattern =
-    [ regex "week[ -]?end|fin de semana"
+    [ regex "(para finalizar|(a )?fin de|terminando) semana|week[ -]?end"
     ]
-  , prod = \_ -> tt weekend
+  , prod = \_ -> do
+      td <- intersect (dayOfWeek 5) (cycleNth TG.Week 0)
+      tt td
   }
 
 ruleOrdinalQuarterYear :: Rule
@@ -1541,7 +1543,7 @@ ruleNextWeekAlt = Rule
     name = "next week (alt)"
   , pattern =
     [
-      regex "pr(ó|o)xim(o|a)s?|siguientes?"
+      regex "pr(ó|o)xim(o|a)s?"
     , Predicate $ isGrain TG.Week
     ]
   , prod = \_ -> tt $ cycleNth TG.Week 1
@@ -1566,6 +1568,37 @@ ruleYearByAddingThreeNumbers = Rule
           v2 <- getIntValue t2
           tt $ year $ 1000 + v1 + v2
       _ -> Nothing
+  }
+
+ruleFinDeMes :: Rule
+ruleFinDeMes = Rule
+  { name = "fin de mes"
+  , pattern =
+    [ regex "(para finalizar|a fin de|terminando( el)?) mes"
+    ]
+  , prod = \_ -> tt $ cycleLastOf TG.Day $ cycleNth TG.Month 0
+  }
+
+ruleInicioDeMes :: Rule
+ruleInicioDeMes = Rule
+  { name = "inicio de mes"
+  , pattern =
+    [ regex "((el )?otro|(el )?siguiente|comienzo de|a principio de) mes"
+    ]
+  , prod = \_ -> do
+      td <- intersect (dayOfMonth 1) (cycleNth TG.Month 1)
+      tt td
+  }
+
+ruleInicioDeSemana :: Rule
+ruleInicioDeSemana = Rule
+  { name = "inicio de semana"
+  , pattern =
+    [ regex "((el |la )?(otro|otra)|(la )?siguiente|comienzo de|a principio de) semana"
+    ]
+  , prod = \_ -> do
+      td <- intersect (dayOfWeek 1) (cycleNth TG.Week 1)
+      tt td
   }
 
 rules :: [Rule]
@@ -1643,7 +1676,10 @@ rules =
   , ruleTomorrow
   , ruleTwoTimeTokensSeparatedBy
   , ruleUltimoDayofweekDeTime
-  , ruleWeekend
+  , ruleFinDeSemana
+  , ruleFinDeMes
+  , ruleInicioDeMes
+  , ruleInicioDeSemana
   , ruleYear
   , ruleYearLatent
   , ruleYesterday

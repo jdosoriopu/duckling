@@ -240,7 +240,6 @@ allExamples = concat
              , "proxima semana"
              , "proximas semana"
              , "próxima semana"
-             , "siguiente semana"
              ]
   , examples (datetime (2013, 1, 1, 0, 0, 0) Month)
              [ "el pasado mes"
@@ -418,7 +417,7 @@ allExamples = concat
   , examples (datetimeInterval ((2013, 2, 11, 18, 0, 0), (2013, 2, 12, 0, 0, 0)) Hour)
              [ "ayer por la noche"
              ]
-  , examples (datetimeInterval ((2013, 2, 15, 18, 0, 0), (2013, 2, 18, 0, 0, 0)) Hour)
+  , examples (datetime (2013, 2, 15, 0, 0, 0) Day)
              [ "este weekend"
              , "este fin de semana"
              ]
@@ -555,5 +554,29 @@ allExamples = concat
   , examples (datetime (1990, 5, 4, 0, 0, 0) Day)
              [
                "cuatro de mayo de mil novecientos noventa"
+             ]
+  , examples (datetime (2013, 2, 28, 0, 0, 0) Day)
+             [ "para finalizar mes"
+             , "a fin de mes"
+             , "terminando el mes"
+             ]
+  , examples (datetime (2013, 3, 1, 0, 0, 0) Day)
+             [ "el otro mes"
+             , "comienzo de mes"
+             , "el siguiente mes"
+             , "a principio de mes"
+             ]
+  , examples (datetime (2013, 2, 15, 0, 0, 0) Day)
+             [ "para finalizar semana"
+             , "a fin de semana"
+             , "fin de semana"
+             , "terminando semana"
+             ]
+  , examples (datetime (2013, 2, 18, 0, 0, 0) Day)
+             [ "el otro semana"
+             , "comienzo de semana"
+             , "la siguiente semana"
+             , "siguiente semana"
+             , "a principio de semana"
              ]
   ]

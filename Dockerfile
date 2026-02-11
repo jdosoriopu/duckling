@@ -1,6 +1,8 @@
 FROM haskell:8-buster AS builder
 
-RUN apt-get update -qq && \
+RUN echo "deb http://archive.debian.org/debian buster main" > /etc/apt/sources.list && \
+  echo "deb http://archive.debian.org/debian-security buster/updates main" >> /etc/apt/sources.list && \
+  apt-get update -qq && \
   apt-get install -qq -y libpcre3 libpcre3-dev build-essential pkg-config --fix-missing --no-install-recommends && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -25,9 +27,11 @@ RUN stack install
 
 FROM debian:buster
 
-ENV LANG C.UTF-8
+ENV LANG=C.UTF-8
 
-RUN apt-get update -qq && \
+RUN echo "deb http://archive.debian.org/debian buster main" > /etc/apt/sources.list && \
+  echo "deb http://archive.debian.org/debian-security buster/updates main" >> /etc/apt/sources.list && \
+  apt-get update -qq && \
   apt-get install -qq -y libpcre3 libgmp10 --no-install-recommends && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

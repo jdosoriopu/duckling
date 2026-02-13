@@ -578,8 +578,8 @@ classifiers
                                likelihoods = HashMap.fromList [], n = 0}}),
        ("fin de semana",
         Classifier{okData =
-                     ClassData{prior = 0.0, unseen = -2.0794415416798357,
-                               likelihoods = HashMap.fromList [("", 0.0)], n = 6},
+                     ClassData{prior = 0.0, unseen = -2.3025850929940455,
+                               likelihoods = HashMap.fromList [("", 0.0)], n = 8},
                    koData =
                      ClassData{prior = -infinity, unseen = -0.6931471805599453,
                                likelihoods = HashMap.fromList [], n = 0}}),
@@ -1372,8 +1372,8 @@ classifiers
                                likelihoods = HashMap.fromList [], n = 0}}),
        ("fin de mes",
         Classifier{okData =
-                     ClassData{prior = 0.0, unseen = -1.6094379124341003,
-                               likelihoods = HashMap.fromList [("", 0.0)], n = 3},
+                     ClassData{prior = 0.0, unseen = -1.9459101490553135,
+                               likelihoods = HashMap.fromList [("", 0.0)], n = 5},
                    koData =
                      ClassData{prior = -infinity, unseen = -0.6931471805599453,
                                likelihoods = HashMap.fromList [], n = 0}}),

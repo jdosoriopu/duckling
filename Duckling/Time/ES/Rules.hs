@@ -850,7 +850,7 @@ ruleFinDeSemana :: Rule
 ruleFinDeSemana = Rule
   { name = "fin de semana"
   , pattern =
-    [ regex "(para finalizar|(a )?fin de|terminando) semana|week[ -]?end"
+    [ regex "(para finalizar|finalizando( la)?|(a )?fin de|terminando) semana|week[ -]?end"
     ]
   , prod = \_ -> do
       td <- intersect (dayOfWeek 5) (cycleNth TG.Week 0)
@@ -1574,7 +1574,7 @@ ruleFinDeMes :: Rule
 ruleFinDeMes = Rule
   { name = "fin de mes"
   , pattern =
-    [ regex "(para finalizar|a fin de|terminando( el)?) mes"
+    [ regex "(para finalizar|finalizando( el)?|a fin de|terminando( el)?) mes"
     ]
   , prod = \_ -> tt $ cycleLastOf TG.Day $ cycleNth TG.Month 0
   }

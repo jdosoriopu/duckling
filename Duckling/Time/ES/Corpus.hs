@@ -559,6 +559,8 @@ allExamples = concat
              [ "para finalizar mes"
              , "a fin de mes"
              , "terminando el mes"
+             , "finalizando el mes"
+             , "finalizando mes"
              ]
   , examples (datetime (2013, 3, 1, 0, 0, 0) Day)
              [ "el otro mes"
@@ -571,6 +573,8 @@ allExamples = concat
              , "a fin de semana"
              , "fin de semana"
              , "terminando semana"
+             , "finalizando la semana"
+             , "finalizando semana"
              ]
   , examples (datetime (2013, 2, 18, 0, 0, 0) Day)
              [ "el otro semana"
